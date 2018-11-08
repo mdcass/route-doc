@@ -3,6 +3,7 @@
 namespace Mdcass\RouteDoc\Providers;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Mdcass\RouteDoc\RouteDocService;
 
 /**
  * Service provider
@@ -44,6 +45,10 @@ class ServiceProvider extends BaseServiceProvider
         if (!$this->shouldBootInEnvironment()) {
             return;
         }
+
+        $this->app->singleton(RouteDocService::class, function ($app) {
+            return new RouteDocService($app['router'], $app['config']['route-doc']);
+        });
     }
 
     /**

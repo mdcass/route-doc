@@ -25,4 +25,14 @@ return [
     */
 
     'uri' => env('ROUTE_DOC_ENV', '/route-docs'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | URI Segment Whitelist
+    |--------------------------------------------------------------------------
+    |
+    | The URI starting segments to include when listing routes
+    |
+    */
+    'uri-segments' => ['api'],
 ];

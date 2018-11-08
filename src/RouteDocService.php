@@ -3,6 +3,7 @@
 namespace Mdcass\RouteDoc;
 
 use Illuminate\Config\Repository as Config;
+use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 
 class RouteDocService
@@ -13,26 +14,28 @@ class RouteDocService
     private $router;
 
     /**
-     * @var Config
+     * @var array
      */
     private $config;
 
     /**
      * RouteDocService constructor.
      * @param Router $router
-     * @param Config $config
+     * @param array $config
      */
-    public function __construct(Router $router, Config $config)
+    public function __construct(Router $router, array $config)
     {
         $this->router = $router;
         $this->config = $config;
     }
 
     /**
-     * @return \Illuminate\Routing\RouteCollection|\Illuminate\Routing\Route[]
+     * @return \Illuminate\Routing\RouteCollection|Route[]
      */
     public function listRoutes()
     {
-        return $this->router->getRoutes();
+        return array_filter($this->router->getRoutes()->getRoutes(), function (Route $route) {
+            return starts_with($route->uri(), config('route-doc.uri-segments'));
+        });
     }
 }

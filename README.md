@@ -9,3 +9,17 @@ Documentation generators can often become time consuming to maintain where gener
 required after each change. I wanted the ability to maintain documentation in phpdocs as
 any developer does autonomously and have that presented in a semantic and searchable way
 for other developers to explore codebases more efficiently.
+
+## Installation
+
+You can install the package via composer:
+
+```bash
+composer require mdcass/route-doc
+```
+
+You can optionally publish the config file with
+
+```bash
+php artisan vendor:publish --provider="Mdcass\RouteDoc\Providers\ServiceProdiver" --tag="config"
+```

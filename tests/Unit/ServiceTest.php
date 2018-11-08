@@ -7,11 +7,18 @@ use Tests\TestCase;
 
 class ServiceTest extends TestCase
 {
-    public function testExample()
+    public function testServiceWillListRoutesUnderSegmentConfig()
     {
-        app(RouteDocService::class);
+        \Route::get('/api/service-will-list-routes')->name('tmp-route');
 
-        $response = $this->get(config('route-doc.uri'));
-        $response->assertStatus(200);
+        $routes = app(RouteDocService::class)->listRoutes();
+
+        $simpleRoutes = array_map(function ($route) {
+            /** @var $route \Illuminate\Routing\Route */
+            return $route->getName();
+        }, $routes);
+
+        $this->assertTrue(in_array('tmp-route', $simpleRoutes));
+        $this->assertTrue(!in_array('route-docs.index', $simpleRoutes));
     }
 }
