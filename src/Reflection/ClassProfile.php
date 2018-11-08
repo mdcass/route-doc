@@ -2,17 +2,16 @@
 
 namespace Mdcass\RouteDoc\Reflection;
 
-abstract class ClassProfile
+use Mdcass\RouteDoc\Traits\HasDocBlock;
+
+abstract class ClassProfile extends ReflectorProfile
 {
-    /**
-     * @var \phpDocumentor\Reflection\DocBlockFactory
-     */
-    protected $docBlockFactory;
+    use HasDocBlock;
 
     /**
      * @var \ReflectionClass
      */
-    protected $reflectionClass;
+    protected $reflector;
 
     /**
      * @var string
@@ -20,49 +19,43 @@ abstract class ClassProfile
     protected $subClass;
 
     /**
-     * @var string|null
-     */
-    protected $rawDocBlock;
-
-    /**
      * ClassProfile constructor.
      *
-     * @param string $class
-     * @throws \ReflectionException
+     * @param \ReflectionClass $reflectionClass
      * @throws \Throwable
      */
-    public function __construct(string $class)
+    public function __construct(\ReflectionClass $reflectionClass)
     {
-        $this->reflectionClass = new \ReflectionClass($class);
-        $this->docBlockFactory = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
+        $this->reflector = $reflectionClass;
 
         if ($this->subClass) {
             throw_unless(
-                $this->reflectionClass->isSubclassOf($this->subClass),
-                new \InvalidArgumentException("Class [$class] is not subclass of [$this->subClass]")
+                $this->reflector->isSubclassOf($this->subClass),
+                new \InvalidArgumentException("Class [$reflectionClass->name] is not subclass of [$this->subClass]")
             );
         }
 
-        $this->rawDocBlock = $this->reflectionClass->getDocComment();
+        /** @see HasDocBlock */
+        $this->rawDocBlock = $this->reflector->getDocComment();
     }
 
     /**
-     * @return \phpDocumentor\Reflection\DocBlock|null
+     * @param bool $noParentMethods Don't include methods from parent classes (default true)
+     * @return MethodProfile[]
      */
-    public function getDocBlock()
+    public function methods($noParentMethods = true)
     {
-        return $this->rawDocBlock
-            ? $this->docBlockFactory->create($this->rawDocBlock)
-            : null;
-    }
+        if (!$noParentMethods) {
+            return $this->reflector->getMethods();
+        }
 
-    /**
-     * @return null|string
-     */
-    public function getSummary()
-    {
-        return $this->getDocBlock()
-            ? $this->getDocBlock()->getSummary()
-            : null;
+        $methods = array_filter($this->reflector->getMethods(), function ($method) {
+            /** @var \ReflectionMethod $method */
+            return $method->getDeclaringClass()->getName() === $this->reflector->getName();
+        });
+
+        return array_map(function ($method) {
+            return new MethodProfile($method);
+        }, $methods);
     }
 }

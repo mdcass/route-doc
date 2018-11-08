@@ -7,6 +7,12 @@ use phpDocumentor\Reflection\DocBlock;
 use Tests\Fixtures\UserController;
 use Tests\SimpleTestCase;
 
+/**
+ * Unit test uses ControllerProfile to test abstract functionality
+ * of ClassProfile
+ *
+ * @see Mdcass\RouteDoc\Reflection\ClassProfile
+ */
 class ClassProfileTest extends SimpleTestCase
 {
     /**
@@ -15,9 +21,10 @@ class ClassProfileTest extends SimpleTestCase
      */
     public function testControllerProfileRetrievesDocBlock()
     {
-        $controllerProfile = new ControllerProfile(UserController::class);
+        $controllerProfile = new ControllerProfile(new \ReflectionClass(UserController::class));
 
         $this->assertTrue($controllerProfile->getDocBlock() instanceof DocBlock);
+        $this->assertTrue($controllerProfile->getName() === UserController::class);
     }
 
     /**
@@ -28,6 +35,14 @@ class ClassProfileTest extends SimpleTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        new ControllerProfile(self::class);
+        new ControllerProfile(new \ReflectionClass(self::class));
+    }
+
+    public function testControllerProfileCanReadDocBlock()
+    {
+        $controllerProfile = new ControllerProfile(new \ReflectionClass(UserController::class));
+
+        $this->assertEquals('Users', $controllerProfile->getSummary());
+        $this->assertEquals('<p>The API Resource for Users</p>', $controllerProfile->getDescription());
     }
 }

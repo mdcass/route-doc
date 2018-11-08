@@ -3,7 +3,9 @@
     "description": "Starting boilerplate for Laravel packages. Override the content in here when creating your own package",
     "type": "library",
     "keywords": ["laravel","lumen"],
-    "require": {},
+    "require": {
+        "erusev/parsedown": "^1.7"
+    },
     "require-dev": {
         "matthewbdaly/artisan-standalone": "0.0.*",
         "mockery/mockery": "~1.0",
