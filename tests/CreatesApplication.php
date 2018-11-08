@@ -8,7 +8,7 @@ trait CreatesApplication
 {
     protected function getPackageProviders($app)
     {
-        return ['Package\ServiceProvider'];
+        return ['Mdcass\RouteDoc\Providers\ServiceProvider'];
     }
 
     protected function getPackageAliases($app)
