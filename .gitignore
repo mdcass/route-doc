@@ -1,0 +1,7 @@
+*.swp
+.DS_Store
+.idea/
+vendor/
+composer.lock
+storage/
+bootstrap/
