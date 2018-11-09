@@ -2,6 +2,8 @@
 
 namespace Mdcass\RouteDoc\Traits;
 
+use Mdcass\RouteDoc\DocBlock\TagProfile;
+
 /**
  * Trait for reflection profiles with a doc block. The profile class
  * should set the property $rawDocBlock which is used to instantiate
@@ -52,7 +54,7 @@ trait HasDocBlock
     }
 
     /**
-     * @return null|\phpDocumentor\Reflection\DocBlock\Tag[]
+     * @return null|TagProfile[]
      */
     public function getTags()
     {
@@ -60,6 +62,8 @@ trait HasDocBlock
             return null;
         }
 
-        return $this->getDocBlock()->getTags();
+        return array_map(function ($tag) {
+            return new TagProfile($tag);
+        }, $this->getDocBlock()->getTags());
     }
 }

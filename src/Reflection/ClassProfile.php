@@ -46,13 +46,13 @@ abstract class ClassProfile extends ReflectorProfile
     public function methods($noParentMethods = true)
     {
         if (!$noParentMethods) {
-            return $this->reflector->getMethods();
+            $methods = $this->reflector->getMethods();
+        } else {
+            $methods = array_filter($this->reflector->getMethods(), function ($method) {
+                /** @var \ReflectionMethod $method */
+                return $method->getDeclaringClass()->getName() === $this->reflector->getName();
+            });
         }
-
-        $methods = array_filter($this->reflector->getMethods(), function ($method) {
-            /** @var \ReflectionMethod $method */
-            return $method->getDeclaringClass()->getName() === $this->reflector->getName();
-        });
 
         return array_map(function ($method) {
             return new MethodProfile($method);

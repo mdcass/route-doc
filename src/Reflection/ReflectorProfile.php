@@ -9,6 +9,11 @@ abstract class ReflectorProfile
      */
     protected $reflector;
 
+    /**
+     * Get the Class Name
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->reflector->getName();
