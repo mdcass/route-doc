@@ -1,6 +1,6 @@
 <?php
 
-namespace Mdcass\RouteDoc\Reflection;
+namespace Mdcass\RouteDoc\Profile\Reflection;
 
 use Mdcass\RouteDoc\Traits\HasDocBlock;
 

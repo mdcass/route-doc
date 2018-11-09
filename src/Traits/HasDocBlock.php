@@ -2,7 +2,7 @@
 
 namespace Mdcass\RouteDoc\Traits;
 
-use Mdcass\RouteDoc\DocBlock\TagProfile;
+use Mdcass\RouteDoc\Profile\DocBlock\TagProfile;
 
 /**
  * Trait for reflection profiles with a doc block. The profile class

@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Mdcass\RouteDoc\Reflection\ControllerProfile;
+use Mdcass\RouteDoc\Profile\Reflection\ControllerProfile;
 use phpDocumentor\Reflection\DocBlock;
 use Tests\Fixtures\UserController;
 use Tests\SimpleTestCase;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mdcass\RouteDoc\DocBlock;
+namespace Mdcass\RouteDoc\Profile\DocBlock;
 
 use phpDocumentor\Reflection\DocBlock\Tags\Param;
 

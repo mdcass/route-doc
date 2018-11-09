@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use Mdcass\RouteDoc\Reflection\ControllerProfile;
-use Mdcass\RouteDoc\Reflection\MethodProfile;
-use Mdcass\RouteDoc\Reflection\RequestProfile;
+use Mdcass\RouteDoc\Profile\Reflection\ControllerProfile;
+use Mdcass\RouteDoc\Profile\Reflection\MethodProfile;
+use Mdcass\RouteDoc\Profile\Reflection\RequestProfile;
 use Tests\Fixtures\UserController;
 use Tests\SimpleTestCase;
 

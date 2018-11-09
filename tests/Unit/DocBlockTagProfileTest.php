@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Mdcass\RouteDoc\DocBlock\TagProfile;
-use Mdcass\RouteDoc\Reflection\MethodProfile;
+use Mdcass\RouteDoc\Profile\DocBlock\TagProfile;
+use Mdcass\RouteDoc\Profile\Reflection\MethodProfile;
 use Tests\Fixtures\UserController;
 use Tests\SimpleTestCase;
 

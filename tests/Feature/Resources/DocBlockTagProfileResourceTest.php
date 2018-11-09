@@ -4,8 +4,7 @@ namespace Tests\Feature\Resources;
 
 use Illuminate\Http\Request;
 use Mdcass\RouteDoc\Http\Resources\DocBlock\TagProfileResource;
-use Mdcass\RouteDoc\Reflection\ControllerProfile;
-use Mdcass\RouteDoc\Reflection\MethodProfile;
+use Mdcass\RouteDoc\Profile\Reflection\ControllerProfile;
 use Tests\Fixtures\UserController;
 use Tests\TestCase;
 

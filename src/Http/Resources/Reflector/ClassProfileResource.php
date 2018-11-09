@@ -2,7 +2,7 @@
 
 namespace Mdcass\RouteDoc\Http\Resources\Reflector;
 
-use Mdcass\RouteDoc\Reflection\ClassProfile;
+use Mdcass\RouteDoc\Profile\Reflection\ClassProfile;
 
 /**
  * @property ClassProfile $resource

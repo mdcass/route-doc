@@ -4,7 +4,7 @@ namespace Tests\Feature\Resources;
 
 use Illuminate\Http\Request;
 use Mdcass\RouteDoc\Http\Resources\Reflector\MethodProfileResource;
-use Mdcass\RouteDoc\Reflection\MethodProfile;
+use Mdcass\RouteDoc\Profile\Reflection\MethodProfile;
 use Tests\Fixtures\UserController;
 use Tests\TestCase;
 
